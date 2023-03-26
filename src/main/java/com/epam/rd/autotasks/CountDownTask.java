@@ -3,7 +3,8 @@ package com.epam.rd.autotasks;
 
 
 public class CountDownTask implements Task{
-    public int countdown, executeWasCalled;
+    public int value;
+
 
     /**
      * constructor of `CountDownTask` takes a single int value as a parameter.
@@ -15,15 +16,15 @@ public class CountDownTask implements Task{
     public CountDownTask(int value) {
         //throw new UnsupportedOperationException();
         if(value>0){
-            this.countdown = value;
+            this.value = value;
         }else{
-            this.countdown = 0;
+            this.value = 0;
         }
     }
 
     public int getValue() {
-        //throw new UnsupportedOperationException();
-        return this.countdown;
+
+        return this.value;
     }
 
     /**
@@ -32,16 +33,20 @@ public class CountDownTask implements Task{
      */
     @Override
     public void execute() {
-        //throw new UnsupportedOperationException();
-        while(countdown!=0){
-            executeWasCalled++;
-            countdown = countdown-executeWasCalled;
+
+        if(value-1 >= 0){
+            value --;
         }
+
+
+
     }
 
     @Override
     public boolean isFinished() {
         //throw new UnsupportedOperationException();
-        return countdown==0;
+        return value == 0;
     }
+
+
 }

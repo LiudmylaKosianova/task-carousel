@@ -8,21 +8,22 @@ package com.epam.rd.autotasks;
  */
 
 public class CompleteByRequestTask implements Task {
-    public boolean completeWasCalled, executeWasCalled = false;
+    public boolean completeWasCalled, lastExecuteCalled = false;
     public CompleteByRequestTask() {
     }
 
     @Override
     public void execute() {
         //throw new UnsupportedOperationException();
-        executeWasCalled = true;
+        if(completeWasCalled){
+            lastExecuteCalled = true;}
 
     }
 
     @Override
     public boolean isFinished() {
         //throw new UnsupportedOperationException();
-        return completeWasCalled && executeWasCalled;
+        return completeWasCalled && lastExecuteCalled;
     }
 
     public void complete() {
