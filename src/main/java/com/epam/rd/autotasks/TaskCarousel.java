@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class TaskCarousel {
     public int capacity, countExecuteCalls;
-    ArrayList <Task> tasks;
+    ArrayList <Task> tasks = new ArrayList<>();
 
     public TaskCarousel(int capacity) {
         //throw new UnsupportedOperationException();
@@ -25,6 +25,7 @@ public class TaskCarousel {
     public boolean addTask(Task task) {
         //throw new UnsupportedOperationException();
         if(task == null || task.isFinished() || isFull()){return false;}
+
         if(tasks.size()<capacity){
             tasks.add(task);
             return true;
@@ -47,14 +48,16 @@ public class TaskCarousel {
 
         if(isEmpty()){return false;}
 
+        tasks.get(countExecuteCalls).execute();
+
+        if(tasks.get(countExecuteCalls).isFinished()){
+            tasks.remove(countExecuteCalls);
+            countExecuteCalls--;
+        }
+
         countExecuteCalls++;
         if(countExecuteCalls == tasks.size()){
             countExecuteCalls=0;
-        }
-
-        tasks.get(countExecuteCalls).execute();
-        if(tasks.get(countExecuteCalls).isFinished()){
-            tasks.remove(countExecuteCalls);
         }
         return true;
     }
@@ -66,6 +69,7 @@ public class TaskCarousel {
     public boolean isFull() {
         //throw new UnsupportedOperationException();
         return tasks.size()==capacity;
+
     }
 
     /**
